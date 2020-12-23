@@ -24,4 +24,9 @@ newToDoField.addEventListener('keydown', (event) => {
     <button class="destroy"></button>
     </li>`);
     newToDoField.value = '';
+
+    const notCompletedTogglers = root.querySelectorAll('.toggle:not(:checked)');
+    const counter = root.querySelector('.todo-count');
+
+    counter.innerHTML = `${notCompletedTogglers.length} item left`;
 })
