@@ -39,3 +39,12 @@ itemsList.addEventListener('click', (event) => {
     event.target.closest('.todo-item').remove();
     updateInfo();
 })
+
+itemsList.addEventListener('click', (event) => {
+    if (!event.target.matches('.toggle')) {
+        return;
+    }
+
+    event.target.closest('.todo-item').classList.toggle('completed', event.target.checked);
+    updateInfo();
+})
