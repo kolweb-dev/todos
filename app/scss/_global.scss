@@ -1,0 +1,58 @@
+
+
+html{
+    box-sizing: border-box;
+}
+*,*::before,*::after{
+    box-sizing:inherit;
+}
+html,
+body {
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+}
+a{
+    display: inline-block;
+    text-decoration: none;
+    //color: #ccc;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+body{
+    font-family: "Roboto-Regular" ,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    //color: #ccc;
+    .wrapper{
+        position: relative;
+        // overflow-x: hidden;
+    }
+    
+}
+
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    padding: 0;
+}
+
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+	flex: 1 0 auto;
+}
+.footer {
+	flex: 0 0 auto;
+}
+
+
+
+
