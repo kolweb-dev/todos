@@ -1,4 +1,10 @@
 'use strict';
+const todosFormServer = [
+    {id:1,title:'CSS', completed:true},
+    {id:2,title:'HTML', completed:falseм },
+    {id:3,title:'Javascript', completed:true}
+    ];
+
 
 const root = document.querySelector('.todoapp');
 const newToDoField = document.querySelector('.new-todo');
@@ -34,6 +40,20 @@ filter.addEventListener('click', (event) => {
         }
     }
 })
+
+initTodos(todosFormServer);
+
+function initTodos(todos) {
+    for (const todo of todos){
+        itemsList.insertAdjacentHTML('beforeend', `
+        <li class="todo-item ${todo.completed ? 'completed' : ''}">
+    <input id="todo-${todo.id}" class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''}>
+    <label for="todo-${todo.id}">${todo.title}</label>
+    <button class="destroy"></button>
+    </li>`);
+    }
+    updateInfo();
+}
 
 function updateInfo() {
     const completedTogglers = root.querySelectorAll('.toggle:checked');
