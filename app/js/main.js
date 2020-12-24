@@ -1,7 +1,7 @@
 'use strict';
 let currentTodos = [
     {id: 1, title: 'CSS', completed: true},
-    {id: 2, title: 'HTML', completed: true},
+    {id: 2, title: 'HTML', completed: false},
     {id: 3, title: 'Javascript', completed: false}
 ];
 
@@ -13,8 +13,68 @@ const allToggler = root.querySelector('.toggle-all');
 const clearCompletedButton = root.querySelector('.clear-completed')
 const filter = root.querySelector('.filters');
 
-initTodos(currentTodos);
+render(currentTodos);
 
+function render() {
+    const activeTodos = currentTodos.filter(todo => !todo.completed);
+    const completedTodos = currentTodos.filter(todo => todo.completed);
+
+
+    root.innerHTML = `
+    <header class="header">
+        <h1 style="margin-top: 50px;">todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?">
+    </header>
+    ${currentTodos.length > 0 ? `
+    <section class="main">
+            <span class="toggle-all-container">
+                <input id="toggle-all" 
+                class="toggle-all" 
+                type="checkbox"
+                ${activeTodos.length === 0 ? 'checked' : ''}
+                >
+                <label for="toggle-all">Mark all as complete</label>
+            </span>
+
+        <ul class="todo-list">
+        ${currentTodos.map(todo => `
+     <li class="todo-item ${todo.completed ? 'completed' : ''}"
+        data-todo-id="${todo.id}"
+        >
+    <input id="todo-${todo.id}" class="toggle" type="checkbox" ${todo.completed ? 'checked' : ''}>
+    <label for="todo-${todo.id}">${todo.title}</label>
+    <button class="destroy"></button>
+    </li>
+     `).join('')} 
+        </ul>
+    </section>
+    <footer class="footer">
+            <span class="todo-count">
+                ${activeTodos.length} items left
+            </span>
+        <ul class="filters">
+            <li>
+                <a href="#/" class="selected" data-filter="all">All</a>
+            </li>
+            <li>
+                <a href="#/active" data-filter="active">Active</a>
+            </li>
+            <li>
+                <a href="#/completed" data-filter="completed">Completed</a>
+            </li>
+        </ul>
+        ${completedTodos.length > 0 ? `
+        <button class="clear-completed">
+            Clear completed
+        </button>
+        ` : ''}
+        
+    </footer>
+    ` : ''}
+    
+
+    `;
+}
 
 filter.addEventListener('click', (event) => {
     if (!event.target.dataset.filter) {
@@ -57,7 +117,7 @@ function initTodos() {
     </li>
      `).join('')} 
 `;
-    
+
     updateInfo();
 }
 
